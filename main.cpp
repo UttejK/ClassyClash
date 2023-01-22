@@ -11,8 +11,8 @@ int main() {
   Vector2 mapPos{0., 0.};
   const float mapScale{4.f};
 
-  Character knight;
-  knight.setScreenPos(WinWidth, WinHeight);
+  Character knight{WinWidth, WinHeight};
+
 
   SetTargetFPS(60);
 
@@ -35,6 +35,6 @@ int main() {
 
     EndDrawing();
   }
-
+  
   CloseWindow();
 }
