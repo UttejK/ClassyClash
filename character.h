@@ -2,11 +2,13 @@
 
 class Character {
 public:
-	Character(int winWidth, int winHeight);
+  Character(int winWidth, int winHeight);
   Vector2 getWorldPos() { return worldPos; }
-  
+
   void tick(float deltaTime);
   void undoMovement();
+
+  Rectangle getCollisionRec();
 
 private:
   Texture2D texture{LoadTexture("characters/knight_idle_spritesheet.png")};
@@ -15,7 +17,7 @@ private:
   Vector2 screenPos{};
   Vector2 worldPos{};
 
-  Vector2 worldPosLastFrame{0,0};
+  Vector2 worldPosLastFrame{0, 0};
 
   // 1: Right, -1: Left
   float rightLeft{1.f};

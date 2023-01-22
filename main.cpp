@@ -1,4 +1,5 @@
 #include "character.h"
+#include "prop.h"
 #include "raylib/include/raylib.h"
 #include "raylib/include/raymath.h"
 
@@ -13,6 +14,11 @@ int main() {
 
   Character knight{WinWidth, WinHeight};
 
+  Prop props[2]{
+      Prop{Vector2{600.f, 300.f}, LoadTexture("nature_tileset/Rock.png")},
+      Prop{Vector2{400.f, 500.f}, LoadTexture("nature_tileset/Log.png")}
+
+  };
 
   SetTargetFPS(60);
 
@@ -24,6 +30,12 @@ int main() {
 
     // draw the map
     DrawTextureEx(map, mapPos, 0, mapScale, WHITE);
+
+    // Draw the props
+    for (auto prop : props) {
+      prop.Render(knight.getWorldPos());
+    }
+
     knight.tick(GetFrameTime());
 
     // Check map bounds
@@ -33,8 +45,17 @@ int main() {
       knight.undoMovement();
     }
 
+    // check prop collisions
+    for (auto prop : props) {
+
+      if (CheckCollisionRecs(prop.getCollisionRec(knight.getWorldPos()),
+                             knight.getCollisionRec())) {
+        knight.undoMovement();
+      }
+    }
+
     EndDrawing();
   }
-  
+
   CloseWindow();
 }

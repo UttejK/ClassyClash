@@ -9,8 +9,6 @@ Character::Character(int winWidth, int winHeight) {
                static_cast<float>(winHeight) / 2.f - scale * (0.5f * height)};
 }
 
-
-
 void Character::tick(float deltaTime) {
 
   worldPosLastFrame = worldPos;
@@ -55,3 +53,7 @@ void Character::tick(float deltaTime) {
 }
 
 void Character::undoMovement() { worldPos = worldPosLastFrame; }
+
+Rectangle Character::getCollisionRec() {
+  return Rectangle{screenPos.x, screenPos.y, width * scale, height * scale};
+}
