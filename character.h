@@ -28,7 +28,7 @@ private:
   int maxFrames{6};
   float updateTime{1.0 / 12.0};
 
-  float speed{8.f};
+  float speed{4.f};
 
   float width{};
   float height{};
